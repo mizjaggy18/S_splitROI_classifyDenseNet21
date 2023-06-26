@@ -101,7 +101,7 @@ def run(cyto_job, parameters):
 
     job.update(status=Job.RUNNING, progress=10, statusComment="Initialization...")
 
-    modelname = "66k-4classnpc_densenet21adam_best_model_100ep.pth"    
+    modelname = "/models/66k-4classnpc_densenet21adam_best_model_100ep.pth"    
     gpuid = 0
     device = torch.device(gpuid if gpuid!=-2 and torch.cuda.is_available() else 'cpu')
     print("Device: ", device)
