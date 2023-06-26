@@ -23,8 +23,6 @@ from cytomine.models import Property, Annotation, AnnotationTerm, AnnotationColl
 import torch
 from torchvision.models import DenseNet
 
-from PIL import Image
-import matplotlib.pyplot as plt
 import cv2
 import math
 
