@@ -15,7 +15,7 @@ RUN mkdir -p /app
 ADD descriptor.json /app/descriptor.json
 ADD splitroi_densenet21.py /app/splitroi_densenet21.py
 ADD 66k-4classnpc_densenet21adam_best_model_100ep.pth /app/66k-4classnpc_densenet21adam_best_model_100ep.pth
-RUN chmod 444 /app/4classnpc_densenet21adam_best_model_100ep.pth
+RUN chmod 444 /app/66k-4classnpc_densenet21adam_best_model_100ep.pth
 
 
 ENTRYPOINT ["python3", "/app/splitroi_densenet21.py"]
