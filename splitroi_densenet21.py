@@ -28,7 +28,7 @@ import math
 
 from shapely import affinity
 from shapely.geometry.multipolygon import MultiPolygon
-from scipy.spatial import Voronoi
+# from scipy.spatial import Voronoi
 
 
 
