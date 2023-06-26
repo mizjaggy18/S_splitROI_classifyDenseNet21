@@ -1,0 +1,162 @@
+{
+  "name": "S_splitROI_classifyDenseNet21",
+  "description": "To split large ROI in WSI to small polygon with user-defined sides followed by DN21 classification",
+  "container-image": {
+    "image": "mizjaggy18/s_splitroi_classifydensenet21",
+    "type": "singularity"
+  },
+  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_ROIPOLY_TERM] [CYTOMINE_POLY_SIDES] [CYTOMINE_ID_USER]",
+  "inputs": [
+    {
+      "id": "cytomine_host",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine host",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_public_key",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine public key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {  
+      "id": "cytomine_private_key",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine private key",
+      "set-by-server": true,
+      "optional": false,
+      "type": "String"
+    },
+    {
+      "id": "cytomine_id_project",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine project ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_id_software",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine software ID",
+      "set-by-server": true,
+      "optional": false,
+      "type": "Number"
+    },
+    {
+      "id": "cytomine_id_images",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine Image IDs",
+      "description": "Images on which to classify objects",
+      "optional": false,
+      "type": "ListDomain",
+      "uri": "/api/project/$currentProject$/imageinstance.json",
+      "uri-print-attribute": "instanceFilename",
+      "uri-sort-attribute": "created"
+    },
+    {
+      "id": "cytomine_id_roi_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine ROI-WSI term ID",
+      "description": "Ontology term ID for ROI-WSI that will be split into smaller polygons",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "cytomine_id_roipoly_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine ROI-WSI-poly term ID",
+      "description": "Ontology term ID for ROI-WSI-poly that has been split into smaller polygons",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "cytomine_poly_sides",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Polygon sides in px",
+      "description": "Size of polygon sides in px. e.g.: 2048 to get max of 2048 x 2048 sized regions",
+      "optional": false,
+      "type": "Number",
+      "default-value": 512
+    },
+    {
+      "id": "normal_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Class0 (Normal) term ID",
+      "description": "Term for stain identified as Normal",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "lhp_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Class1 (LHP) term ID",
+      "description": "Term for stain identified as Lymphoid Hyperplasia (LHP)",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "npi_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Class2 (NPI) term ID",
+      "description": "Term for stain identified as Nasopharyngeal Inflammation (NPI)",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "npc_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Class3 (NPC) term ID",
+      "description": "Term for stain identified as Nasopharyngeal Carcinoma (NPC)",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "th_remove",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Threshold for patch having white/light area",
+      "description": "0.1 means the algorithm will not consider patch having 10% white/light area (in bin[15])",
+      "optional": false,
+      "type": "Number",
+      "default-value": 0.5
+    }    
+  ],
+
+  "schema-version": "cytomine-0.1"
+}
