@@ -10,8 +10,8 @@ RUN pip install torch
 RUN pip install torchvision
 
 RUN mkdir -p /models 
-ADD 66k-4classnpc_densenet21adam_best_model_100ep.pth /models/66k-4classnpc_densenet21adam_best_model_100ep.pth
-RUN chmod 444 /models/66k-4classnpc_densenet21adam_best_model_100ep.pth
+ADD 66k-4classnpc_densenet21adamssv_best_model_100ep.pth /models/66k-4classnpc_densenet21adamssv_best_model_100ep.pth
+RUN chmod 444 /models/66k-4classnpc_densenet21adamssv_best_model_100ep.pth
 
 #ADD FILES
 RUN mkdir -p /app
